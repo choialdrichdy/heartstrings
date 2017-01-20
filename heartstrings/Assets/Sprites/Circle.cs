@@ -5,11 +5,14 @@ using UnityEngine;
 public class Circle : MonoBehaviour
 {
     public GameObject circle;
+    public GameObject comet;
     public void spawn(float x, float y)
     {
         circle = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         circle.transform.position = new Vector2(x, y);
         circle.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        HeartstringCircle hsc = circle.AddComponent<HeartstringCircle>();
+        hsc.comet = comet;
         StartCoroutine(expand(circle));
     }
     public IEnumerator expand(GameObject circle)

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Spawn : MonoBehaviour
 {
     public Circle circle;
+    public GameObject comet;
     //Time it takes to spawn theGoodies
     [Space(3)]
     public float waitingForNextSpawn = 1;
@@ -23,23 +24,35 @@ public class Spawn : MonoBehaviour
     void Start()
     {
         Circle circle = gameObject.AddComponent<Circle>() as Circle;
-        circle.spawn(Random.Range(xMin, xMax), Random.Range(yMin, yMax));
+        circle.comet = comet;
+        circle.spawn(9, 0);
+        circle.spawn(27, 0);
+
+        /*startPoints = new Vector2[2]{
+            new Vector2(-9,0),
+            new Vector2(9,0)
+        };
+
+        endPoints = new Vector2[2]{
+            new Vector2(9,0),
+            new Vector2(27,0)
+        };*/
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        theCountdown -= Time.deltaTime;
-        if (theCountdown <= 0)
-        {
-            SpawnBeats();
-            theCountdown = waitingForNextSpawn;
-        }
-    }
+    //void Update()
+    //{
+    //    theCountdown -= Time.deltaTime;
+    //    if (theCountdown <= 0)
+    //    {
+    //        SpawnBeats();
+    //        theCountdown = waitingForNextSpawn;
+    //    }
+    //}
 
-    void SpawnBeats()
+    void SpawnBeats(float x, float y)
     {
         Circle circle = gameObject.AddComponent<Circle>() as Circle;
-        circle.spawn(Random.Range(xMin, xMax), Random.Range(yMin, yMax));
+        circle.spawn(x, y);
     }
 }
