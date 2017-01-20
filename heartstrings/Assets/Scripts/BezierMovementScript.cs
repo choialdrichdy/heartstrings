@@ -15,6 +15,9 @@ public class BezierMovementScript : MonoBehaviour
     private int index;
 
     public bool isInverted;
+    public float startMoveTime;
+
+    private float timeOffset;
 
     // Use this for initialization
     private void initControlPoints()
@@ -35,6 +38,11 @@ public class BezierMovementScript : MonoBehaviour
     {
         index = 0;
 
+        if (startMoveTime != -1)
+            timeOffset = startMoveTime;
+        else
+            timeOffset = 0;
+
         startPoints = new Vector2[2]{
             new Vector2(-9,0),
             new Vector2(9,0)
@@ -46,13 +54,13 @@ public class BezierMovementScript : MonoBehaviour
         };
 
         startTimes = new float[2]{
-            0,
-            5
+            0+timeOffset,
+            5+timeOffset
         };
 
         endTimes = new float[2]{
-            5,
-            10
+            5+timeOffset,
+            10+timeOffset
         };
 
         transform.position = startPoints[index];
@@ -69,7 +77,9 @@ public class BezierMovementScript : MonoBehaviour
                 index = 1;
             initControlPoints();
         }
-        transform.position = bezier(Time.time);
+
+        if (Time.time >= startTimes[index])
+            transform.position = bezier(Time.time);
     }
 
     Vector2 bezier(float time)
