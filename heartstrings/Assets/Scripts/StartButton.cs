@@ -4,11 +4,10 @@ using UnityEngine.SceneManagement;
 
 
 public class StartButton : MonoBehaviour {
-	public RectTransform startText;
 	public AudioSource startSound;
 
 	void start() {
-		startText = GetComponent<RectTransform> ();
+		
 		startSound = GetComponent<AudioSource> ();
 	}
 
@@ -19,8 +18,9 @@ public class StartButton : MonoBehaviour {
 
 	IEnumerator WaitABit() {
 		Debug.Log(Time.time);
+        startSound.Play();
 		yield return new WaitForSeconds(1);
-		SceneManager.LoadScene ("Scenes/Main_Scene");
+		SceneManager.LoadScene ("Scenes/MainGame");
 		Debug.Log(Time.time);
 	}
 }
