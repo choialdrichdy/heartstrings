@@ -46,10 +46,25 @@ public class CSVReader : MonoBehaviour {
         }
     }
 
+    private bool Load()
+    {
+
+        //2.153,3,temp
+        //4.131,3,temp
+        //6.128,3,temp
+        //8.028,3,temp
+        coordinatesAndText.Add(new string[] { "2.153","3","temp" });
+        coordinatesAndText.Add(new string[] { "4.131", "3", "temp" });
+        coordinatesAndText.Add(new string[] { "6.128", "3", "temp" });
+        coordinatesAndText.Add(new string[] { "8.028", "3", "temp" });
+
+        return false;
+    }
+
     private void Start()
     {
         coordinatesAndText = new List<string[]>();
-        Load(";alkdsf");
+        Load();
     }
 
     // Update is called once per frame
