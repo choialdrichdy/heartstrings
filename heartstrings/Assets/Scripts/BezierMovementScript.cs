@@ -24,6 +24,8 @@ public class BezierMovementScript : MonoBehaviour
 
     private GameObject circle;
     public GameObject comet;
+    
+    private string[] texts = { "HELLO", "WORLD", "CORN", "FLUFFY", "SLEEPY", "GABRIEL", "IGLESIAS"};
 
     // Use this for initialization
     private void initControlPoints()
