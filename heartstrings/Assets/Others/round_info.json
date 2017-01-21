@@ -1,0 +1,66 @@
+[
+	{
+		"round": "1",
+		"round_time": "30",
+		"total_points": "17",
+		"minimum_points": "16",
+		"music_file": "test test test",
+		"music_coordinates": "stuff stuff stuff"
+	},
+	{
+		"round": "2_good",
+		"round_time": "30",
+		"total_points": "17",
+		"minimum_points": "16",
+		"music_file": "test test test",
+		"music_coordinates": "stuff stuff stuff"
+	},
+	{
+		"round": "2_bad",
+		"round_time": "30",
+		"total_points": "17",
+		"minimum_points": "16",
+		"music_file": "test test test",
+		"music_coordinates": "stuff stuff stuff"
+	},
+	{
+		"round": "3_good",
+		"round_time": "30",
+		"total_points": "17",
+		"minimum_points": "16",
+		"music_file": "test test test",
+		"music_coordinates": "stuff stuff stuff"
+	},
+	{
+		"round": "3_bad",
+		"round_time": "30",
+		"total_points": "17",
+		"minimum_points": "16",
+		"music_file": "test test test",
+		"music_coordinates": "stuff stuff stuff"
+	},
+	{
+		"round": "4_good",
+		"round_time": "10",
+		"total_points": "17",
+		"minimum_points": "16",
+		"music_file": "test test test",
+		"music_coordinates": "stuff stuff stuff"
+	},
+	{
+		"round": "4_norm",
+		"round_time": "10",
+		"total_points": "17",
+		"minimum_points": "16",
+		"music_file": "test test test",
+		"music_coordinates": "stuff stuff stuff"
+	},
+	{
+		"round": "4_bad",
+		"round_time": "10",
+		"total_points": "17",
+		"minimum_points": "16",
+		"music_file": "test test test",
+		"music_coordinates": "stuff stuff stuff"
+	}
+]
