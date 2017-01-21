@@ -7,7 +7,10 @@ public class HeartstringCircle : MonoBehaviour {
     public GameObject comet;
 	// Use this for initialization
 	void Start () {
-        
+        //GameObject[] objects = GameObject.FindGameObjectsWithTag("Comet");
+        comet = GameObject.FindGameObjectWithTag("Comet");
+        //if(objects.Length > 0)
+        //    comet = objects[0];
 	}
 	
 	// Update is called once per frame
@@ -17,6 +20,8 @@ public class HeartstringCircle : MonoBehaviour {
 
     private void OnMouseDown()
     {
+        print("on moutles tdonw");
+
         //check kung nsa circle na
         //destroy the circle
         float distance = computeDistance();
@@ -38,6 +43,8 @@ public class HeartstringCircle : MonoBehaviour {
     {
         float cometX = comet.transform.position.x;
         float cometY = comet.transform.position.y;
+
+        print(cometX + ", " + cometY);
 
         float circleX = transform.position.x;
         float circleY = transform.position.y;

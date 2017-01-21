@@ -8,12 +8,21 @@ public class Circle : MonoBehaviour
     public GameObject comet;
     public void spawn(float x, float y)
     {
-        circle = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        circle.transform.position = new Vector2(x, y);
-        circle.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        HeartstringCircle hsc = circle.AddComponent<HeartstringCircle>();
-        hsc.comet = comet;
-        StartCoroutine(expand(circle));
+
+        for (int i = 0; i < CSVReader.coordinatesAndText.Count - 1; i++)
+        {
+
+            circle = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            circle.transform.position = new Vector2(float.Parse(CSVReader.coordinatesAndText[i][0]), float.Parse(CSVReader.coordinatesAndText[i][1]));
+            circle.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            HeartstringCircle hsc = circle.AddComponent<HeartstringCircle>();
+            hsc.comet = comet;
+
+            circle.GetComponent<MeshRenderer>().enabled = false;
+            //startPoints[i + 1] = new Vector2(timeScale * float.Parse(CSVReader.coordinatesAndText[i][0]), float.Parse(CSVReader.coordinatesAndText[i][1]));
+        }
+
+        //StartCoroutine(expand(circle));
     }
     public IEnumerator expand(GameObject circle)
     {
