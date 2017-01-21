@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Circle : MonoBehaviour
 {
     public GameObject circle;
     public GameObject comet;
+    public GameObject canvas;
     public void spawn(float x, float y)
     {
         circle = GameObject.CreatePrimitive(PrimitiveType.Sphere);
