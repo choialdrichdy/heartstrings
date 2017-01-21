@@ -55,7 +55,10 @@ public class BezierMovementScript : MonoBehaviour
             HeartstringCircle hsc = circle.AddComponent<HeartstringCircle>();
             Canvas[] canvas = circle.GetComponentsInChildren<Canvas>();
             Text text = canvas[0].GetComponentInChildren<Text>();
+            text.fontSize = 24;
             text.text = CSVReader.coordinatesAndText[i][2];
+
+
         }
 
         audioSource = GetComponent<AudioSource>();

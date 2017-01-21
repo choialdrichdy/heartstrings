@@ -5,8 +5,9 @@ using UnityEngine;
 public class HeartstringCircle : MonoBehaviour {
 
     public GameObject comet;
-	// Use this for initialization
-	void Start () {
+    GameObject particle;
+    // Use this for initialization
+    void Start () {
         //GameObject[] objects = GameObject.FindGameObjectsWithTag("Comet");
         comet = GameObject.FindGameObjectWithTag("Comet");
         if (comet == null)
@@ -26,6 +27,7 @@ public class HeartstringCircle : MonoBehaviour {
                 Ray ray = Camera.main.ScreenPointToRay(touch.position);
                 if (Physics.Raycast(ray)) {
                     pressScreen();
+                    Instantiate(particle, transform.position, transform.rotation);
                 }
             }
         }
