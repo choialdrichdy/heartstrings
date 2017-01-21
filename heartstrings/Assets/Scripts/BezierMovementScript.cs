@@ -18,6 +18,7 @@ public class BezierMovementScript : MonoBehaviour
     public float startMoveTime;
 
     private float timeOffset;
+    private float timeScale;
 
     // Use this for initialization
     private void initControlPoints()
@@ -36,6 +37,7 @@ public class BezierMovementScript : MonoBehaviour
 
     void Start()
     {
+        timeScale = 2;
         index = 0;
 
         if (startMoveTime != -1)
@@ -43,24 +45,39 @@ public class BezierMovementScript : MonoBehaviour
         else
             timeOffset = 0;
 
-        startPoints = new Vector2[2]{
-            new Vector2(-9,0),
-            new Vector2(9,0)
-        };
+        //        2.153,3,temp
+        //4.131,3,temp
+        //6.128,3,temp
+        //8.028,3,temp
 
-        endPoints = new Vector2[2]{
-            new Vector2(9,0),
-            new Vector2(27,0)
-        };
+        startPoints = new Vector2[CSVReader.coordinatesAndText.Count];
+        startPoints[0] = new Vector2(0, 3);
 
-        startTimes = new float[2]{
+        for (int i = 0; i < CSVReader.coordinatesAndText.Count - 1; i++)
+        {
+            startPoints[i + 1] = new Vector2(timeScale * float.Parse(CSVReader.coordinatesAndText[i][0]), float.Parse(CSVReader.coordinatesAndText[i][1]));
+        }
+
+        endPoints = new Vector2[CSVReader.coordinatesAndText.Count];
+        endPoints[0] = new Vector2(startPoints[1][0], startPoints[1][1]);
+
+        for (int i = 1; i < CSVReader.coordinatesAndText.Count; i++)
+        {
+            endPoints[i] = new Vector2(timeScale * float.Parse(CSVReader.coordinatesAndText[i][0]), float.Parse(CSVReader.coordinatesAndText[i][1]));
+        }
+
+        startTimes = new float[4]{
             0+timeOffset,
-            5+timeOffset
+            2.153f+timeOffset,
+            4.131f+timeOffset,
+            6.128f+timeOffset
         };
 
-        endTimes = new float[2]{
-            5+timeOffset,
-            10+timeOffset
+        endTimes = new float[4]{
+            2.153f+timeOffset,
+            4.131f+timeOffset,
+            6.128f+timeOffset,
+            8.028f+timeOffset
         };
 
         transform.position = startPoints[index];
@@ -70,11 +87,11 @@ public class BezierMovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (index < 2 && Time.time >= endTimes[index])
+        if (index < CSVReader.coordinatesAndText.Count + 1 && Time.time >= endTimes[index])
         {
             index++;
-            if (index == 2)
-                index = 1;
+            if (index == CSVReader.coordinatesAndText.Count)
+                index = CSVReader.coordinatesAndText.Count-1;
             initControlPoints();
         }
 

@@ -25,8 +25,14 @@ public class Spawn : MonoBehaviour
     {
         Circle circle = gameObject.AddComponent<Circle>() as Circle;
         circle.comet = comet;
-        circle.spawn(9, 0);
-        circle.spawn(27, 0);
+
+        for (int i = 0; i < CSVReader.coordinatesAndText.Count; i++)
+        {
+            circle.spawn(float.Parse(CSVReader.coordinatesAndText[i][0])*2, float.Parse(CSVReader.coordinatesAndText[i][1]));
+        }
+
+        //circle.spawn(9, 0);
+        //circle.spawn(27, 0);
 
         /*startPoints = new Vector2[2]{
             new Vector2(-9,0),

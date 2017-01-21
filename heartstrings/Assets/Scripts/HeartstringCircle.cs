@@ -7,7 +7,7 @@ public class HeartstringCircle : MonoBehaviour {
     public GameObject comet;
 	// Use this for initialization
 	void Start () {
-        Debug.Log("tesst");
+        
 	}
 	
 	// Update is called once per frame
