@@ -10,7 +10,6 @@ public class Spawn : MonoBehaviour
     [Space(3)]
     public float waitingForNextSpawn = 1;
     public float theCountdown = 1;
-
     // the range of X
     [Header("X Spawn Range")]
     public float xMin = 0.0f;
@@ -23,12 +22,13 @@ public class Spawn : MonoBehaviour
 
     void Start()
     {
+        //PlayerPrefs.SetFloat("");
         Circle circle = gameObject.AddComponent<Circle>() as Circle;
         circle.comet = comet;
 
         for (int i = 0; i < CSVReader.coordinatesAndText.Count; i++)
         {
-            circle.spawn(float.Parse(CSVReader.coordinatesAndText[i][0])*2, float.Parse(CSVReader.coordinatesAndText[i][1]));
+            circle.spawn(float.Parse(CSVReader.coordinatesAndText[i][0]), float.Parse(CSVReader.coordinatesAndText[i][1]));
         }
 
         //circle.spawn(9, 0);
