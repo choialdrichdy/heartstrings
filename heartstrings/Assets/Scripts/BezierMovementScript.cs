@@ -45,10 +45,10 @@ public class BezierMovementScript : MonoBehaviour
         for (int i = 0; i < CSVReader.coordinatesAndText.Count; i++)
         {
             circle = (GameObject)Instantiate(Resources.Load("CircleSpawn"));
-            circle.transform.position = new Vector2(float.Parse(CSVReader.coordinatesAndText[i][0]) * 2, float.Parse(CSVReader.coordinatesAndText[i][1]));
             circle.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+            circle.transform.position = new Vector2(float.Parse(CSVReader.coordinatesAndText[i][0]) * 2, float.Parse(CSVReader.coordinatesAndText[i][1]));
             HeartstringCircle hsc = circle.AddComponent<HeartstringCircle>();
-            
+
         }
 
         audioSource = GetComponent<AudioSource>();
@@ -70,34 +70,25 @@ public class BezierMovementScript : MonoBehaviour
         //8.028,3,temp
 
         startPoints = new Vector2[CSVReader.coordinatesAndText.Count];
+        startTimes = new float[CSVReader.coordinatesAndText.Count];
         startPoints[0] = new Vector2(0, 3);
+        startTimes[0] = 0 + timeOffset;
 
         for (int i = 0; i < CSVReader.coordinatesAndText.Count - 1; i++)
         {
             startPoints[i + 1] = new Vector2(timeScale * float.Parse(CSVReader.coordinatesAndText[i][0]), float.Parse(CSVReader.coordinatesAndText[i][1]));
+            startTimes[i + 1] = float.Parse(CSVReader.coordinatesAndText[i][0]) + timeOffset;
         }
 
         endPoints = new Vector2[CSVReader.coordinatesAndText.Count];
+        endTimes = new float[CSVReader.coordinatesAndText.Count];
         endPoints[0] = new Vector2(startPoints[1][0], startPoints[1][1]);
-
+        endTimes[0] = startPoints[1][0];
         for (int i = 1; i < CSVReader.coordinatesAndText.Count; i++)
         {
             endPoints[i] = new Vector2(timeScale * float.Parse(CSVReader.coordinatesAndText[i][0]), float.Parse(CSVReader.coordinatesAndText[i][1]));
+            endTimes[i] = float.Parse(CSVReader.coordinatesAndText[i][0]) + timeOffset;
         }
-
-        startTimes = new float[4]{
-            0+timeOffset,
-            2.153f+timeOffset,
-            4.131f+timeOffset,
-            6.128f+timeOffset
-        };
-
-        endTimes = new float[4]{
-            2.153f+timeOffset,
-            4.131f+timeOffset,
-            6.128f+timeOffset,
-            8.028f+timeOffset
-        };
 
         transform.position = startPoints[index];
         initControlPoints();
