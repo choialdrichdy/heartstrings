@@ -34,7 +34,15 @@ public class SceneLoader : MonoBehaviour {
 			sceneToLoad = "Scenes/SecondGame";
 		} else if (currentSceneName == "2_CutScene") {
 			sceneToLoad = "Scenes/ThirdGame";
-		} else {
+		} else if (currentSceneName == "ThirdGame") {
+            int totalScore = PlayerPrefs.GetInt("score", 0);
+            if (totalScore >= 70) {
+                sceneToLoad = "Scenes/Good_CutScene";
+            } else if (totalScore < 70 && totalScore >= 40) {
+                sceneToLoad = "Scenes/Norm_CutScene";
+            } else
+                sceneToLoad = "Scenes/Bad_CutScene";
+        } else {
 			sceneToLoad = "Scenes/Start_Scene";
 			PlayerPrefs.DeleteAll();
 			Debug.Log ("This should be the end scene! So we start the game again...");

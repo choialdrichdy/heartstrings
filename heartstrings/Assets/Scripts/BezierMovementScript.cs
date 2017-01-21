@@ -45,13 +45,17 @@ public class BezierMovementScript : MonoBehaviour
 
     void Start()
     {
+
         for (int i = 0; i < CSVReader.coordinatesAndText.Count; i++)
         {
             circle = (GameObject)Instantiate(Resources.Load("RotatingCircleWText"));
             circle.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             circle.transform.position = new Vector2(float.Parse(CSVReader.coordinatesAndText[i][0]) * 2, float.Parse(CSVReader.coordinatesAndText[i][1]));
-            Text text = circle.GetComponentInChildren<Text>();
-            text.text = texts[i];
+
+            HeartstringCircle hsc = circle.AddComponent<HeartstringCircle>();
+            Canvas[] canvas = circle.GetComponentsInChildren<Canvas>();
+            Text text = canvas[0].GetComponentInChildren<Text>();
+            text.text = CSVReader.coordinatesAndText[i][2];
         }
 
         audioSource = GetComponent<AudioSource>();
@@ -66,11 +70,6 @@ public class BezierMovementScript : MonoBehaviour
             timeOffset = startMoveTime;
         else
             timeOffset = 0;
-
-        //        2.153,3,temp
-        //4.131,3,temp
-        //6.128,3,temp
-        //8.028,3,temp
 
         startPoints = new Vector2[CSVReader.coordinatesAndText.Count];
         startTimes = new float[CSVReader.coordinatesAndText.Count];
