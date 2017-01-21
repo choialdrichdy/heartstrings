@@ -20,6 +20,8 @@ public class BezierMovementScript : MonoBehaviour
     private float timeOffset;
     private float timeScale;
 
+    private AudioSource audioSource;
+
     // Use this for initialization
     private void initControlPoints()
     {
@@ -37,6 +39,11 @@ public class BezierMovementScript : MonoBehaviour
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
+        if (audioSource != null)
+            audioSource.Stop();
+
         timeScale = 2;
         index = 0;
 
@@ -91,12 +98,22 @@ public class BezierMovementScript : MonoBehaviour
         {
             index++;
             if (index == CSVReader.coordinatesAndText.Count)
-                index = CSVReader.coordinatesAndText.Count-1;
+            {
+                if (audioSource != null)
+                    audioSource.enabled = false;
+                index = CSVReader.coordinatesAndText.Count - 1;
+            }
             initControlPoints();
         }
 
         if (Time.time >= startTimes[index])
+        {
+            if (audioSource != null && !audioSource.isPlaying && audioSource.enabled)
+            {
+                audioSource.Play();
+            }
             transform.position = bezier(Time.time);
+        }
     }
 
     Vector2 bezier(float time)
