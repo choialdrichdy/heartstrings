@@ -18,6 +18,7 @@ public class Trail : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.RotateAround(new Vector3(x, y, 0.0f), new Vector3(0.0f, 0.0f, 0.1f), 4.0f);
+        
+        transform.RotateAround(new Vector3(x, y, 0.0f), new Vector3(0.0f, 0.0f, 0.1f), Time.time);
     }
 }

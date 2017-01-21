@@ -45,8 +45,8 @@ public class BezierMovementScript : MonoBehaviour
         for (int i = 0; i < CSVReader.coordinatesAndText.Count; i++)
         {
             circle = (GameObject)Instantiate(Resources.Load("CircleSpawn"));
-            circle.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             circle.transform.position = new Vector2(float.Parse(CSVReader.coordinatesAndText[i][0]) * 2, float.Parse(CSVReader.coordinatesAndText[i][1]));
+            circle.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             HeartstringCircle hsc = circle.AddComponent<HeartstringCircle>();
             
         }
@@ -116,6 +116,10 @@ public class BezierMovementScript : MonoBehaviour
                 index = CSVReader.coordinatesAndText.Count - 1;
             }
             initControlPoints();
+            print("index=" + index);
+            print(control1);
+            print(control2);
+            print(endPoints[index]);
         }
 
         if (Time.time >= startTimes[index])
@@ -137,6 +141,12 @@ public class BezierMovementScript : MonoBehaviour
             (3 * (1 - t) * Mathf.Pow(t, 2) * control2) +
             Mathf.Pow(t, 3) * endPoints[index];
 
+        t = 1;
+        Vector2 y = (Mathf.Pow(1 - t, 3) * startPoints[index]) +
+            (3 * Mathf.Pow(1 - t, 2) * t * control1) +
+            (3 * (1 - t) * Mathf.Pow(t, 2) * control2) +
+            Mathf.Pow(t, 3) * endPoints[index];
+        print("endpoint at " + y);
         return x;
     }
 }
