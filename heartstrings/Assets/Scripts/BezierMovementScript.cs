@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BezierMovementScript : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class BezierMovementScript : MonoBehaviour
 
     private GameObject circle;
     public GameObject comet;
+    
+    private string[] texts = { "HELLO", "WORLD", "CORN", "FLUFFY", "SLEEPY", "GABRIEL", "IGLESIAS"};
 
     // Use this for initialization
     private void initControlPoints()
@@ -44,11 +47,13 @@ public class BezierMovementScript : MonoBehaviour
     {
         for (int i = 0; i < CSVReader.coordinatesAndText.Count; i++)
         {
-            circle = (GameObject)Instantiate(Resources.Load("CircleSpawn"));
+            circle = (GameObject)Instantiate(Resources.Load("RotatingCircleWText"));
             circle.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             circle.transform.position = new Vector2(float.Parse(CSVReader.coordinatesAndText[i][0]) * 2, float.Parse(CSVReader.coordinatesAndText[i][1]));
             HeartstringCircle hsc = circle.AddComponent<HeartstringCircle>();
-
+            Canvas[] canvas = circle.GetComponentsInChildren<Canvas>();
+            Text text = canvas[0].GetComponentInChildren<Text>();
+            text.text = texts[i];
         }
 
         audioSource = GetComponent<AudioSource>();
@@ -107,10 +112,6 @@ public class BezierMovementScript : MonoBehaviour
                 index = CSVReader.coordinatesAndText.Count - 1;
             }
             initControlPoints();
-            print("index=" + index);
-            print(control1);
-            print(control2);
-            print(endPoints[index]);
         }
 
         if (Time.time >= startTimes[index])
