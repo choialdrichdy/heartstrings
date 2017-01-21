@@ -50,9 +50,7 @@ public class BezierMovementScript : MonoBehaviour
             circle = (GameObject)Instantiate(Resources.Load("RotatingCircleWText"));
             circle.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             circle.transform.position = new Vector2(float.Parse(CSVReader.coordinatesAndText[i][0]) * 2, float.Parse(CSVReader.coordinatesAndText[i][1]));
-            HeartstringCircle hsc = circle.AddComponent<HeartstringCircle>();
-            Canvas[] canvas = circle.GetComponentsInChildren<Canvas>();
-            Text text = canvas[0].GetComponentInChildren<Text>();
+            Text text = circle.GetComponentInChildren<Text>();
             text.text = texts[i];
         }
 
@@ -138,7 +136,6 @@ public class BezierMovementScript : MonoBehaviour
             (3 * Mathf.Pow(1 - t, 2) * t * control1) +
             (3 * (1 - t) * Mathf.Pow(t, 2) * control2) +
             Mathf.Pow(t, 3) * endPoints[index];
-        print("endpoint at " + y);
         return x;
     }
 }

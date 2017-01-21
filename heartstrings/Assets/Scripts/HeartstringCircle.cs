@@ -9,6 +9,10 @@ public class HeartstringCircle : MonoBehaviour {
 	void Start () {
         //GameObject[] objects = GameObject.FindGameObjectsWithTag("Comet");
         comet = GameObject.FindGameObjectWithTag("Comet");
+        if (comet == null)
+        {
+            print("hello");
+        }
         //if(objects.Length > 0)
         //    comet = objects[0];
 	}
