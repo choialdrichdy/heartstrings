@@ -12,7 +12,6 @@ public class StartButton : MonoBehaviour {
 	}
 
 	public void LoadScene() {
-		Debug.Log ("You have clicked the button!");
 		StartCoroutine(WaitABit());
 	}
 

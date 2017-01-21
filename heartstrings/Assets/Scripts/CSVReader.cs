@@ -49,14 +49,29 @@ public class CSVReader : MonoBehaviour {
     private bool Load()
     {
 
-        //2.153,3,temp
-        //4.131,3,temp
-        //6.128,3,temp
-        //8.028,3,temp
-        coordinatesAndText.Add(new string[] { "2.153","3","temp" });
-        coordinatesAndText.Add(new string[] { "4.131", "3", "temp" });
-        coordinatesAndText.Add(new string[] { "6.128", "3", "temp" });
-        coordinatesAndText.Add(new string[] { "8.028", "3", "temp" });
+        coordinatesAndText.Add(new string[] { "2.000", "3", "temp" });
+        coordinatesAndText.Add(new string[] { "4.000", "0", "temp" });
+        coordinatesAndText.Add(new string[] { "6.000", "3", "temp" });
+        coordinatesAndText.Add(new string[] { "8.000", "0", "temp" });
+        coordinatesAndText.Add(new string[] { "10.000", "-1", "temp" });
+        coordinatesAndText.Add(new string[] { "12.000", "0", "temp" });
+        coordinatesAndText.Add(new string[] { "14.000", "-1", "temp" });
+        coordinatesAndText.Add(new string[] { "16.000", "3", "temp" });
+        coordinatesAndText.Add(new string[] { "18.000", "1", "temp" });
+        coordinatesAndText.Add(new string[] { "20.000", "2", "temp" });
+        coordinatesAndText.Add(new string[] { "22.000", "-2", "temp" });
+        coordinatesAndText.Add(new string[] { "24.000", "-1", "temp" });
+        coordinatesAndText.Add(new string[] { "26.000", "1", "temp" });
+        coordinatesAndText.Add(new string[] { "28.000", "1", "temp" });
+        coordinatesAndText.Add(new string[] { "30.000", "1", "temp" });
+        coordinatesAndText.Add(new string[] { "32.000", "3", "temp" });
+        coordinatesAndText.Add(new string[] { "33.000", "1", "temp" });
+        coordinatesAndText.Add(new string[] { "34.000", "-3", "temp" });
+
+        //coordinatesAndText.Add(new string[] { "2.153","3","temp" });
+        //coordinatesAndText.Add(new string[] { "4.131", "3", "temp" });
+        //coordinatesAndText.Add(new string[] { "6.128", "3", "temp" });
+        //coordinatesAndText.Add(new string[] { "8.028", "3", "temp" });
 
         return false;
     }
