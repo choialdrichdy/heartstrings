@@ -19,10 +19,24 @@ public class HeartstringCircle : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        foreach (Touch touch in Input.touches)
+        {
+            if(touch.phase == TouchPhase.Began)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(touch.position);
+                if (Physics.Raycast(ray)) {
+                    pressScreen();
+                }
+            }
+        }
+    }
 
     private void OnMouseDown()
+    {
+        pressScreen();
+    }
+
+    private void pressScreen()
     {
         float distance = computeDistance();
         int score = PlayerPrefs.GetInt("score", 0);
@@ -30,6 +44,8 @@ public class HeartstringCircle : MonoBehaviour {
         {
             PlayerPrefs.SetInt("score", (score + 2));
             Debug.Log("Great!");
+            
+
         }
         else if (distance < 1 && distance > 0.5)
         {
