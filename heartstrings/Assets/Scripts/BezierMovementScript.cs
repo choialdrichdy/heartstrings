@@ -22,6 +22,9 @@ public class BezierMovementScript : MonoBehaviour
 
     private AudioSource audioSource;
 
+    private GameObject circle;
+    public GameObject comet;
+
     // Use this for initialization
     private void initControlPoints()
     {
@@ -39,6 +42,15 @@ public class BezierMovementScript : MonoBehaviour
 
     void Start()
     {
+        for (int i = 0; i < CSVReader.coordinatesAndText.Count; i++)
+        {
+            circle = (GameObject)Instantiate(Resources.Load("CircleSpawn"));
+            circle.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+            circle.transform.position = new Vector2(float.Parse(CSVReader.coordinatesAndText[i][0]) * 2, float.Parse(CSVReader.coordinatesAndText[i][1]));
+            HeartstringCircle hsc = circle.AddComponent<HeartstringCircle>();
+            
+        }
+
         audioSource = GetComponent<AudioSource>();
 
         if (audioSource != null)
@@ -114,6 +126,7 @@ public class BezierMovementScript : MonoBehaviour
             }
             transform.position = bezier(Time.time);
         }
+
     }
 
     Vector2 bezier(float time)
