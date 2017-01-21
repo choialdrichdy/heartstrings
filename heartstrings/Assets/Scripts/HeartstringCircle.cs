@@ -24,19 +24,21 @@ public class HeartstringCircle : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        //check kung nsa circle na
-        //destroy the circle
         float distance = computeDistance();
+        int score = PlayerPrefs.GetInt("score", 0);
         if (distance < 1 && distance < 0.5)
         {
+            PlayerPrefs.SetInt("score", (score + 2));
             Debug.Log("Great!");
         }
         else if (distance < 1 && distance > 0.5)
         {
+            PlayerPrefs.SetInt("score", score++);
             Debug.Log("Good!");
         }
         else if (distance > 1)
         {
+            PlayerPrefs.SetInt("score", (score - 1));
             Debug.Log("Miss!");
         }
     }
