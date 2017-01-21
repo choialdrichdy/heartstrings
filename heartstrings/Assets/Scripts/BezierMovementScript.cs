@@ -121,10 +121,6 @@ public class BezierMovementScript : MonoBehaviour
                 index = CSVReader.coordinatesAndText.Count - 1;
             }
             initControlPoints();
-            print("index=" + index);
-            print(control1);
-            print(control2);
-            print(endPoints[index]);
         }
 
         if (Time.time >= startTimes[index])
