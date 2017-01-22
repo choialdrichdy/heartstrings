@@ -9,6 +9,8 @@ public class CSVReader : MonoBehaviour {
     private string[] coordinates;
 
     public static List<string[]> coordinatesAndText;
+    public static List<string[]> coordinatesAndText2;
+    public static List<string[]> coordinatesAndText3;
 
     private bool Load(string fileName)
     {
@@ -31,11 +33,6 @@ public class CSVReader : MonoBehaviour {
                 }
                 while (line != null);
                 theReader.Close();
-
-                //for(int i = 0; i < textList.Count; i++)
-                //{
-                //    print(coordinatesList[i][0] + "," + coordinatesList[i][1] + " + " + textList[i]);
-                //}
 
                 return true;
             }
@@ -65,13 +62,64 @@ public class CSVReader : MonoBehaviour {
         coordinatesAndText.Add(new string[] { "28.000", "1", "drown" });
         coordinatesAndText.Add(new string[] { "30.000", "1", "in" });
         coordinatesAndText.Add(new string[] { "32.000", "3", "ink" });
-        //coordinatesAndText.Add(new string[] { "33.000", "1", "temp" });
-        //coordinatesAndText.Add(new string[] { "34.000", "-3", "temp" });
 
-        //coordinatesAndText.Add(new string[] { "2.153","3","temp" });
-        //coordinatesAndText.Add(new string[] { "4.131", "3", "temp" });
-        //coordinatesAndText.Add(new string[] { "6.128", "3", "temp" });
-        //coordinatesAndText.Add(new string[] { "8.028", "3", "temp" });
+        coordinatesAndText2.Add(new string[] { "0.840", "1", "temp" });
+        coordinatesAndText2.Add(new string[] { "1.680", "0", "temp" });
+        coordinatesAndText2.Add(new string[] { "2.520", "-1", "temp" });
+        coordinatesAndText2.Add(new string[] { "3.360", "2", "temp" });
+        coordinatesAndText2.Add(new string[] { "4.200", "2", "temp" });
+        coordinatesAndText2.Add(new string[] { "5.040", "0", "temp" });
+        coordinatesAndText2.Add(new string[] { "5.880", "1", "temp" });
+        coordinatesAndText2.Add(new string[] { "6.720", "2", "temp" });
+        coordinatesAndText2.Add(new string[] { "7.560", "1", "temp" });
+        coordinatesAndText2.Add(new string[] { "8.400", "0", "temp" });
+        coordinatesAndText2.Add(new string[] { "9.240", "3", "temp" });
+        coordinatesAndText2.Add(new string[] { "10.080", "1", "temp" });
+        coordinatesAndText2.Add(new string[] { "11.760", "1", "temp" });
+        coordinatesAndText2.Add(new string[] { "14.280", "1", "temp" });
+        coordinatesAndText2.Add(new string[] { "15.120", "0", "temp" });
+        coordinatesAndText2.Add(new string[] { "15.960", "-1", "temp" });
+        coordinatesAndText2.Add(new string[] { "16.800", "2", "temp" });
+        coordinatesAndText2.Add(new string[] { "17.640", "2", "temp" });
+        coordinatesAndText2.Add(new string[] { "18.480", "0", "temp" });
+        coordinatesAndText2.Add(new string[] { "19.320", "1", "temp" });
+        coordinatesAndText2.Add(new string[] { "20.160", "2", "temp" });
+        coordinatesAndText2.Add(new string[] { "21.000", "1", "temp" });
+        coordinatesAndText2.Add(new string[] { "21.840", "0", "temp" });
+        coordinatesAndText2.Add(new string[] { "22.680", "3", "temp" });
+        coordinatesAndText2.Add(new string[] { "23.520", "1", "temp" });
+        coordinatesAndText2.Add(new string[] { "25.200", "1", "temp" });
+
+        coordinatesAndText3.Add(new string[] { "0.666", "-1", "temp" });
+        coordinatesAndText3.Add(new string[] { "2.000", "2", "temp" });
+        coordinatesAndText3.Add(new string[] { "2.666", "-2", "temp" });
+        coordinatesAndText3.Add(new string[] { "3.333", "-1", "temp" });
+        coordinatesAndText3.Add(new string[] { "4.666", "-2", "temp" });
+        coordinatesAndText3.Add(new string[] { "5.999", "-1", "temp" });
+        coordinatesAndText3.Add(new string[] { "7.333", "2", "temp" });
+        coordinatesAndText3.Add(new string[] { "7.999", "-2", "temp" });
+        coordinatesAndText3.Add(new string[] { "8.666", "-1", "temp" });
+        coordinatesAndText3.Add(new string[] { "9.999", "-2", "temp" });
+        coordinatesAndText3.Add(new string[] { "11.332", "-1", "temp" });
+        coordinatesAndText3.Add(new string[] { "12.666", "2", "temp" });
+        coordinatesAndText3.Add(new string[] { "13.332", "-2", "temp" });
+        coordinatesAndText3.Add(new string[] { "13.999", "-1", "temp" });
+        coordinatesAndText3.Add(new string[] { "15.332", "-2", "temp" });
+        coordinatesAndText3.Add(new string[] { "16.665", "-1", "temp" });
+        coordinatesAndText3.Add(new string[] { "17.999", "2", "temp" });
+        coordinatesAndText3.Add(new string[] { "18.665", "-2", "temp" });
+        coordinatesAndText3.Add(new string[] { "19.332", "-1", "temp" });
+        coordinatesAndText3.Add(new string[] { "20.665", "-2", "temp" });
+        coordinatesAndText3.Add(new string[] { "21.998", "-1", "temp" });
+        coordinatesAndText3.Add(new string[] { "23.332", "2", "temp" });
+        coordinatesAndText3.Add(new string[] { "23.998", "-2", "temp" });
+        coordinatesAndText3.Add(new string[] { "24.665", "-1", "temp" });
+        coordinatesAndText3.Add(new string[] { "25.998", "-2", "temp" });
+        coordinatesAndText3.Add(new string[] { "27.331", "-1", "temp" });
+        coordinatesAndText3.Add(new string[] { "28.665", "2", "temp" });
+        coordinatesAndText3.Add(new string[] { "29.331", "-2", "temp" });
+        coordinatesAndText3.Add(new string[] { "29.998", "-1", "temp" });
+        coordinatesAndText3.Add(new string[] { "31.331", "-2", "temp" });
 
         return false;
     }
