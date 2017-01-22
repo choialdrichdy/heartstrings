@@ -53,7 +53,7 @@ public class HeartstringCircle : MonoBehaviour {
 
         float distance = computeDistance();
         int score = PlayerPrefs.GetInt("score", 0);
-        if (distance < 1 && distance < 0.5)
+        if (distance <= 1)
         {
             PlayerPrefs.SetInt("score", (score ++));
             StartCoroutine(PlayAnimation());
@@ -61,19 +61,9 @@ public class HeartstringCircle : MonoBehaviour {
             //AnimatorPrefab = (GameObject) Instantiate(Resources.Load("TapAnimation"), transform.position, transform.rotation);
             Debug.Log("Great!");
             //text.color = new Color(text.color.r, text.color.g, text.color.b, 1.0f);
-            //text.text = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
-
+            text.color = new Color(255f,255f,255f, 1.0f);
         }
-        else if (distance < 1 && distance > 0.5)
-        {
-            PlayerPrefs.SetInt("score", score++);
-            Debug.Log("Good!");
-            StartCoroutine(PlayAnimation());
-            StopCoroutine(PlayAnimation());
-            //text.color = new Color(text.color.r, text.color.g, text.color.b, 1.0f);
-            //text.text = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
-        }
-        else if (distance > 1)
+        else
         {
             PlayerPrefs.SetInt("score", (score - 0));
             Debug.Log("Miss!");

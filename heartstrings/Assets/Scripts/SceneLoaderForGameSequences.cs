@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoaderForGameSequences : MonoBehaviour {
 
-	public float sceneTime = 5.0f;
+	public float sceneTime = 30.0f;
 
 	// This is a score out of 74!
 	public float MIN_SCORE_FOR_GOOD = 60; 
@@ -39,10 +39,10 @@ public class SceneLoaderForGameSequences : MonoBehaviour {
 	}
 
 	void Update () {
-		Debug.Log ("Current time is:" + Time.time + IS_PLAYING + "?");
+		//Debug.Log ("Current time is:" + Time.time + IS_PLAYING + "?");
 		if (IS_PLAYING) {
 			if (Time.time > sceneTime) {
-				Debug.Log ("Current time is:" + Time.time + " so we're loading the next scene...");
+				//Debug.Log ("Current time is:" + Time.time + " so we're loading the next scene...");
 				IS_PLAYING = false;
 				LoadNextScene ();
 			}

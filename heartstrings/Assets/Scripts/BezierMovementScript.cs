@@ -51,12 +51,14 @@ public class BezierMovementScript : MonoBehaviour
         for (int i = 0; i < CSVReader.coordinatesAndText.Count; i++)
         {
             circle = (GameObject)Instantiate(Resources.Load("RotatingCircleWText"));
-            circle.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+            circle.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             circle.transform.position = new Vector2(float.Parse(CSVReader.coordinatesAndText[i][0]) * 2, float.Parse(CSVReader.coordinatesAndText[i][1]));
-            HeartstringCircle hsc = circle.AddComponent<HeartstringCircle>();
 
-            Text text = circle.GetComponentsInChildren<Canvas>()[0].GetComponentInChildren<Text>();
+            Text text = circle.GetComponentInChildren<Text>();
             text.text = CSVReader.coordinatesAndText[i][2];
+
+            HeartstringCircle hsc = circle.GetComponentInChildren<HeartstringCircle>();
+            hsc.text = text;
         }
 
         audioSource = GetComponent<AudioSource>();
