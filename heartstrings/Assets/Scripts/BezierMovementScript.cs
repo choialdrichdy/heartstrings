@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BezierMovementScript : MonoBehaviour
 {
@@ -25,8 +24,10 @@ public class BezierMovementScript : MonoBehaviour
 
     private GameObject circle;
     public GameObject comet;
-    
-    private string[] texts = { "HELLO", "WORLD", "CORN", "FLUFFY", "SLEEPY", "GABRIEL", "IGLESIAS"};
+
+    private float timeStarted = 0;
+    private bool test = false;
+
 
     // Use this for initialization
     private void initControlPoints()
@@ -35,7 +36,8 @@ public class BezierMovementScript : MonoBehaviour
 
         int controlOffset = 3;
 
-        if (isInverted) {
+        if (isInverted)
+        {
             controlOffset *= -1;
         }
 
@@ -45,19 +47,12 @@ public class BezierMovementScript : MonoBehaviour
 
     void Start()
     {
-
         for (int i = 0; i < CSVReader.coordinatesAndText.Count; i++)
         {
-            circle = (GameObject)Instantiate(Resources.Load("RotatingCircleWText"));
+            circle = (GameObject)Instantiate(Resources.Load("CircleSpawn"));
             circle.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             circle.transform.position = new Vector2(float.Parse(CSVReader.coordinatesAndText[i][0]) * 2, float.Parse(CSVReader.coordinatesAndText[i][1]));
-
             HeartstringCircle hsc = circle.AddComponent<HeartstringCircle>();
-            Canvas[] canvas = circle.GetComponentsInChildren<Canvas>();
-            Text text = canvas[0].GetComponentInChildren<Text>();
-            text.fontSize = 24;
-            text.text = CSVReader.coordinatesAndText[i][2];
-
         }
 
         audioSource = GetComponent<AudioSource>();
@@ -68,10 +63,7 @@ public class BezierMovementScript : MonoBehaviour
         timeScale = 2;
         index = 0;
 
-        if (startMoveTime != -1)
-            timeOffset = startMoveTime;
-        else
-            timeOffset = 0;
+        timeOffset = startMoveTime;
 
         startPoints = new Vector2[CSVReader.coordinatesAndText.Count];
         startTimes = new float[CSVReader.coordinatesAndText.Count];
@@ -87,21 +79,27 @@ public class BezierMovementScript : MonoBehaviour
         endPoints = new Vector2[CSVReader.coordinatesAndText.Count];
         endTimes = new float[CSVReader.coordinatesAndText.Count];
         endPoints[0] = new Vector2(startPoints[1][0], startPoints[1][1]);
-        endTimes[0] = startPoints[1][0];
+        endTimes[0] = startTimes[1];
         for (int i = 1; i < CSVReader.coordinatesAndText.Count; i++)
         {
             endPoints[i] = new Vector2(timeScale * float.Parse(CSVReader.coordinatesAndText[i][0]), float.Parse(CSVReader.coordinatesAndText[i][1]));
+            print(this.gameObject.name + " end points " + endPoints[i]);
             endTimes[i] = float.Parse(CSVReader.coordinatesAndText[i][0]) + timeOffset;
+            print(this.gameObject.name + " end times " + endTimes[i]);
         }
 
-        transform.position = startPoints[index];
         initControlPoints();
+        transform.position = startPoints[index];
+        timeStarted = Time.time;
+        test = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (index < CSVReader.coordinatesAndText.Count + 1 && Time.time >= endTimes[index])
+        float normalizedTime = Time.time;
+
+        if (index < CSVReader.coordinatesAndText.Count + 1 && normalizedTime >= endTimes[index])
         {
             index++;
             if (index == CSVReader.coordinatesAndText.Count)
@@ -109,19 +107,20 @@ public class BezierMovementScript : MonoBehaviour
                 if (audioSource != null)
                     audioSource.enabled = false;
                 index = CSVReader.coordinatesAndText.Count - 1;
+                transform.position = endPoints[index];
+                return;
             }
             initControlPoints();
         }
 
-        if (Time.time >= startTimes[index])
+        if (normalizedTime >= startTimes[index])
         {
             if (audioSource != null && !audioSource.isPlaying && audioSource.enabled)
             {
                 audioSource.Play();
             }
-            transform.position = bezier(Time.time);
+            transform.position = bezier(normalizedTime);
         }
-
     }
 
     Vector2 bezier(float time)
@@ -132,11 +131,6 @@ public class BezierMovementScript : MonoBehaviour
             (3 * (1 - t) * Mathf.Pow(t, 2) * control2) +
             Mathf.Pow(t, 3) * endPoints[index];
 
-        t = 1;
-        Vector2 y = (Mathf.Pow(1 - t, 3) * startPoints[index]) +
-            (3 * Mathf.Pow(1 - t, 2) * t * control1) +
-            (3 * (1 - t) * Mathf.Pow(t, 2) * control2) +
-            Mathf.Pow(t, 3) * endPoints[index];
         return x;
     }
 }
