@@ -58,7 +58,6 @@ public class BezierMovementScript : MonoBehaviour
             text.fontSize = 24;
             text.text = CSVReader.coordinatesAndText[i][2];
 
-
         }
 
         audioSource = GetComponent<AudioSource>();
