@@ -24,18 +24,6 @@ public class HeartstringCircle : MonoBehaviour {
             print("hello");
         }
 
-        text = GameObject.FindWithTag("Text").GetComponent<Text>() as Text;
-        if (text == null)
-        {
-            print("a;dslkfj");
-        }
-        else
-        {
-            print("helowoefwaj;oefijslkdfjlsdkfj");
-        }
-
-        //if(objects.Length > 0)
-        //    comet = objects[0];
     }
 	
 	// Update is called once per frame
@@ -45,17 +33,9 @@ public class HeartstringCircle : MonoBehaviour {
             if (touch.phase == TouchPhase.Began)
             {
                 pressScreen();
+
             }
         }
-
-        //if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) {
-        //    RaycastHit hit;
-        //    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-        //    if (Physics.Raycast(ray, out hit))
-        //        if (hit.collider !=null)
-        //            Instantiate(target, hit.point, transform.rotation);
-        //}
-
     }
 
     private void OnMouseDown()
@@ -66,28 +46,30 @@ public class HeartstringCircle : MonoBehaviour {
     private void pressScreen()
     {
 
-        if (!canclick)
-            return;
+        //if (!canclick)
+        //    return;
 
-        canclick = !canclick;
+        //canclick = !canclick;
 
         float distance = computeDistance();
         int score = PlayerPrefs.GetInt("score", 0);
         if (distance < 1 && distance < 0.5)
         {
             PlayerPrefs.SetInt("score", (score ++));
-            StartCoroutine("PlayAnimation");
+            StartCoroutine(PlayAnimation());
+            StopCoroutine(PlayAnimation());
             //AnimatorPrefab = (GameObject) Instantiate(Resources.Load("TapAnimation"), transform.position, transform.rotation);
             Debug.Log("Great!");
             //text.color = new Color(text.color.r, text.color.g, text.color.b, 1.0f);
             //text.text = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+
         }
         else if (distance < 1 && distance > 0.5)
         {
             PlayerPrefs.SetInt("score", score++);
             Debug.Log("Good!");
-            StartCoroutine("PlayAnimation");
-
+            StartCoroutine(PlayAnimation());
+            StopCoroutine(PlayAnimation());
             //text.color = new Color(text.color.r, text.color.g, text.color.b, 1.0f);
             //text.text = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
         }
@@ -95,8 +77,6 @@ public class HeartstringCircle : MonoBehaviour {
         {
             PlayerPrefs.SetInt("score", (score - 0));
             Debug.Log("Miss!");
-            text.color = new Color(text.color.r, text.color.g, text.color.b, 0f);
-            text.text = "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
         }
     }
 
@@ -105,15 +85,9 @@ public class HeartstringCircle : MonoBehaviour {
         AnimatorPrefab = (GameObject)Instantiate(Resources.Load("TapAnimation"), transform.position, transform.rotation);
         yield return new WaitForSeconds(0.4f);
         Destroy(AnimatorPrefab);
+        if (AnimatorPrefab != null)
+            AnimatorPrefab = null;
 
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.collider.tag == "Circle")
-        {
-            print(";ldsakjf;lakdjs;flkadf");
-        }
     }
 
     private float computeDistance()
