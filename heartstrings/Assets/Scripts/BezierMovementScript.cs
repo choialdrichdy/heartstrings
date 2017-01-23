@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BezierMovementScript : MonoBehaviour
@@ -29,6 +30,8 @@ public class BezierMovementScript : MonoBehaviour
     private float timeStarted = 0;
     private bool test = false;
 
+    public List<string[]> coordinatesAndText;
+
 
     // Use this for initialization
     private void initControlPoints()
@@ -48,17 +51,30 @@ public class BezierMovementScript : MonoBehaviour
 
     void Start()
     {
-        timeScale = 3.5f;
+        
+        if (SceneManager.GetActiveScene().name.Equals("MainGame")) {
+            coordinatesAndText = CSVReader.coordinatesAndText;
+            timeScale = 3.5f;
+        }
+        else if (SceneManager.GetActiveScene().name.Equals("SecondGame")) {
+            coordinatesAndText = CSVReader.coordinatesAndText2;
+            timeScale = 3.5f*(140.0f/120);
+        }
+        else {
+            coordinatesAndText = CSVReader.coordinatesAndText3;
+            timeScale = 6.5f;
+        }
+
         index = 0;
 
-        for (int i = 0; i < CSVReader.coordinatesAndText.Count; i++)
+        for (int i = 0; i < coordinatesAndText.Count; i++)
         {
             circle = (GameObject)Instantiate(Resources.Load("RotatingCircleWText"));
             circle.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
-            circle.transform.position = new Vector2(float.Parse(CSVReader.coordinatesAndText[i][0]) * timeScale, float.Parse(CSVReader.coordinatesAndText[i][1]));
+            circle.transform.position = new Vector2(float.Parse(coordinatesAndText[i][0]) * timeScale, float.Parse(coordinatesAndText[i][1]));
 
             Text text = circle.GetComponentInChildren<Text>();
-            text.text = CSVReader.coordinatesAndText[i][2];
+            text.text = coordinatesAndText[i][2];
 
             HeartstringCircle hsc = circle.GetComponentInChildren<HeartstringCircle>();
             hsc.text = text;
@@ -73,48 +89,48 @@ public class BezierMovementScript : MonoBehaviour
 
         timeOffset = startMoveTime;
 
-        startPoints = new Vector2[CSVReader.coordinatesAndText.Count];
-        startTimes = new float[CSVReader.coordinatesAndText.Count];
+        startPoints = new Vector2[coordinatesAndText.Count];
+        startTimes = new float[coordinatesAndText.Count];
         startPoints[0] = new Vector2(0, 3);
         startTimes[0] = 0 + timeOffset;
 
-        for (int i = 0; i < CSVReader.coordinatesAndText.Count - 1; i++)
+        for (int i = 0; i < coordinatesAndText.Count - 1; i++)
         {
-            startPoints[i + 1] = new Vector2(timeScale * float.Parse(CSVReader.coordinatesAndText[i][0]), float.Parse(CSVReader.coordinatesAndText[i][1]));
-            startTimes[i + 1] = float.Parse(CSVReader.coordinatesAndText[i][0]) + timeOffset;
+            startPoints[i + 1] = new Vector2(timeScale * float.Parse(coordinatesAndText[i][0]), float.Parse(coordinatesAndText[i][1]));
+            startTimes[i + 1] = float.Parse(coordinatesAndText[i][0]) + timeOffset;
         }
 
-        endPoints = new Vector2[CSVReader.coordinatesAndText.Count];
-        endTimes = new float[CSVReader.coordinatesAndText.Count];
+        endPoints = new Vector2[coordinatesAndText.Count];
+        endTimes = new float[ coordinatesAndText.Count];
         endPoints[0] = new Vector2(startPoints[1][0], startPoints[1][1]);
         endTimes[0] = startTimes[1];
-        for (int i = 1; i < CSVReader.coordinatesAndText.Count; i++)
+        for (int i = 1; i < coordinatesAndText.Count; i++)
         {
-            endPoints[i] = new Vector2(timeScale * float.Parse(CSVReader.coordinatesAndText[i][0]), float.Parse(CSVReader.coordinatesAndText[i][1]));
+            endPoints[i] = new Vector2(timeScale * float.Parse(coordinatesAndText[i][0]), float.Parse(coordinatesAndText[i][1]));
             print(this.gameObject.name + " end points " + endPoints[i]);
-            endTimes[i] = float.Parse(CSVReader.coordinatesAndText[i][0]) + timeOffset;
+            endTimes[i] = float.Parse(coordinatesAndText[i][0]) + timeOffset;
             print(this.gameObject.name + " end times " + endTimes[i]);
         }
 
         initControlPoints();
         transform.position = startPoints[index];
-        timeStarted = Time.time;
+        timeStarted = Time.timeSinceLevelLoad;
         test = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float normalizedTime = Time.time;
+        float normalizedTime = Time.timeSinceLevelLoad;
 
-        if (index < CSVReader.coordinatesAndText.Count + 1 && normalizedTime >= endTimes[index])
+        if (index < coordinatesAndText.Count + 1 && normalizedTime >= endTimes[index])
         {
             index++;
-            if (index == CSVReader.coordinatesAndText.Count)
+            if (index == coordinatesAndText.Count)
             {
                 if (audioSource != null)
                     audioSource.enabled = false;
-                index = CSVReader.coordinatesAndText.Count - 1;
+                index = coordinatesAndText.Count - 1;
                 transform.position = endPoints[index];
                 return;
             }

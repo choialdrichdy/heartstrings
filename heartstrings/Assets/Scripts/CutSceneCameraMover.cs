@@ -4,16 +4,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CutSceneCameraMover : MonoBehaviour {
-	//time counter basically makes sure this runs for 10 seconds
-	private float TIME_COUNTER = 10f; 
-	public float speedOfXMovement = 0.025f;
-
+    //time counter basically makes sure this runs for 10 seconds
+    public float time1;
+    public float time2;
+    public float moveX;
 	void Start () {
 	}
 
 	void Update () {
-		if (Time.time < TIME_COUNTER) {
-			transform.Translate (new Vector3(speedOfXMovement,0.00f)); // Decrease the x value to make it slower
-		}
+        /**if (index >= interestPoints.Length)
+            index = interestPoints.Length - 1;**/
+        if (Time.timeSinceLevelLoad > time1 && Time.timeSinceLevelLoad < time2)
+        {
+            transform.Translate(new Vector3(moveX, 0.0f, 0.0f));
+        }
+
 	}
 }

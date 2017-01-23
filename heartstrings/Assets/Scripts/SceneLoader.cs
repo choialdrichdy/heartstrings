@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour {
 
-	private float TIME_COUNTER = 10f; // Load next scene after this countdown
+	public float TIME_COUNTER = 25f; // Load next scene after this countdown
 	private bool IS_PLAYING;
 	private float fadeTime;
 	private Fading fadingClass;
@@ -13,19 +13,20 @@ public class SceneLoader : MonoBehaviour {
 	private string currentSceneName;
 
 	void Start () {
+        
 		IS_PLAYING = true;
-		fadingClass = GameObject.Find ("SceneTransitionHandler").GetComponent<Fading> ();
-		fadingClass.BeginFade (-1);
+		//fadingClass = GameObject.Find ("SceneTransitionHandler").GetComponent<Fading> ();
+		//fadingClass.BeginFade (-1);
 	 	currentSceneName = SceneManager.GetActiveScene ().name; // Get the current scene name
 		Debug.Log ("SCENE LOADER initialized. Current scene is: "+currentSceneName); //Print the current scene name for debugging purposes
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//Debug.Log ("Current time is:"+Time.time);
+		//Debug.Log ("Current time is:"+Time.timeSinceLevelLoad);
 		if (IS_PLAYING) {
-			if (Time.time > TIME_COUNTER) {
-				Debug.Log ("Current time is:" + Time.time + " so we're loading the next scene...");
+			if (Time.timeSinceLevelLoad > TIME_COUNTER) {
+				Debug.Log ("Current time is:" + Time.timeSinceLevelLoad + " so we're loading the next scene...");
 				IS_PLAYING = false;
 				LoadNextScene ();
 			}
@@ -55,10 +56,10 @@ public class SceneLoader : MonoBehaviour {
 	IEnumerator ChangeScene (string sceneToLoad) {
 		Debug.Log("Initiated the IEnumerator");
 		//fade the game and load a new level
-		fadeTime = fadingClass.BeginFade(1);		
+		//fadeTime = fadingClass.BeginFade(1);		
 		Debug.Log("Initiated the IEnumerator");
 		Debug.Log("Waiting for:" + fadeTime + "Seconds");
-		yield return new WaitForSeconds (fadeTime);
+		yield return new WaitForSeconds (0);
 		Debug.Log("Wait done, loading " + sceneToLoad);
 		SceneManager.LoadScene (sceneToLoad, LoadSceneMode.Single);
 	}

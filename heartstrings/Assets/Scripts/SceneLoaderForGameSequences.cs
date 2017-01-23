@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoaderForGameSequences : MonoBehaviour {
 
-	public float sceneTime = 30.0f;
+	public float sceneTime = 45.0f;
 
 	// This is a score out of 74!
-	public float MIN_SCORE_FOR_GOOD = 60; 
-	public float MIN_SCORE_FOR_NORMAL = 30;
+	public int MIN_SCORE_FOR_GOOD = 60; 
+	public int MIN_SCORE_FOR_NORMAL = 30;
 
 	private float fadeTime;
 	private bool IS_PLAYING;
@@ -39,10 +39,11 @@ public class SceneLoaderForGameSequences : MonoBehaviour {
 	}
 
 	void Update () {
-		//Debug.Log ("Current time is:" + Time.time + IS_PLAYING + "?");
+		Debug.Log ("Current time is:" + Time.timeSinceLevelLoad + IS_PLAYING + "?");
+        Debug.Log(PlayerPrefs.GetInt("score"));
 		if (IS_PLAYING) {
-			if (Time.time > sceneTime) {
-				//Debug.Log ("Current time is:" + Time.time + " so we're loading the next scene...");
+			if (Time.timeSinceLevelLoad > sceneTime) {
+				//Debug.Log ("Current time is:" + Time.timeSinceLevelLoad + " so we're loading the next scene...");
 				IS_PLAYING = false;
 				LoadNextScene ();
 			}
@@ -57,8 +58,9 @@ public class SceneLoaderForGameSequences : MonoBehaviour {
 			sceneToLoad = "2_CutScene";
 		} else {
 			int playerScore = PlayerPrefs.GetInt("score");
-			if (playerScore > MIN_SCORE_FOR_GOOD) {
-				sceneToLoad = "Scenes/Bad_Cutscene";
+            Debug.Log("Current score is:" + playerScore + " so we're loading the next scene...");
+            if (playerScore > MIN_SCORE_FOR_GOOD) {
+				sceneToLoad = "Good_Cutscene";
 			} else if (playerScore > MIN_SCORE_FOR_NORMAL) {
  				sceneToLoad = "Normal_Cutscene";
 			} else {

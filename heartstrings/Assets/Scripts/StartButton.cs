@@ -9,6 +9,7 @@ public class StartButton : MonoBehaviour {
 	void start() {
 		
 		startSound = GetComponent<AudioSource> ();
+        PlayerPrefs.SetInt("score",0);
 	}
 
 	public void LoadScene() {
@@ -16,10 +17,10 @@ public class StartButton : MonoBehaviour {
 	}
 
 	IEnumerator WaitABit() {
-		Debug.Log(Time.time);
+		Debug.Log(Time.timeSinceLevelLoad);
         startSound.Play();
 		yield return new WaitForSeconds(1);
-		SceneManager.LoadScene ("Scenes/MainGame");
-		Debug.Log(Time.time);
+		SceneManager.LoadScene ("Scenes/0_CutScene");
+		Debug.Log(Time.timeSinceLevelLoad);
 	}
 }

@@ -28,6 +28,7 @@ public class HeartstringCircle : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        //print("WOOOOOOOOOOOOOOOOOO" + PlayerPrefs.GetInt("score"));
         foreach (Touch touch in Input.touches)
         {
             if (touch.phase == TouchPhase.Began)
@@ -40,6 +41,7 @@ public class HeartstringCircle : MonoBehaviour {
 
     private void OnMouseDown()
     {
+        Debug.Log(PlayerPrefs.GetInt("score"));
         pressScreen();
     }
 
@@ -55,7 +57,7 @@ public class HeartstringCircle : MonoBehaviour {
         int score = PlayerPrefs.GetInt("score", 0);
         if (distance <= 1)
         {
-            PlayerPrefs.SetInt("score", (score ++));
+            PlayerPrefs.SetInt("score", (score + 1));
             StartCoroutine(PlayAnimation());
             StopCoroutine(PlayAnimation());
             //AnimatorPrefab = (GameObject) Instantiate(Resources.Load("TapAnimation"), transform.position, transform.rotation);
@@ -68,6 +70,7 @@ public class HeartstringCircle : MonoBehaviour {
             PlayerPrefs.SetInt("score", (score - 0));
             Debug.Log("Miss!");
         }
+        PlayerPrefs.Save();
     }
 
     IEnumerator PlayAnimation ()

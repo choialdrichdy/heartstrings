@@ -19,6 +19,6 @@ public class Trail : MonoBehaviour
     void Update()
     {
         
-        transform.RotateAround(new Vector3(x, y, 0.0f), new Vector3(0.0f, 0.0f, 0.1f), Time.time);
+        transform.RotateAround(new Vector3(x, y, 0.0f), new Vector3(0.0f, 0.0f, 0.1f), Time.timeSinceLevelLoad);
     }
 }
